@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.candela</groupId>
+	<artifactId>ftv-web</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Football on TV web application</name>
+	<url>http://maven.apache.org</url>
+	
+	<repositories>
+		<repository>
+			<id>projectlombok.org</id>
+			<url>http://projectlombok.org/mavenrepo</url>
+		</repository>
+		<repository>
+			<id>jboss-maven2-release-repository2</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>objectify-appengine</id>
+			<url>http://objectify-appengine.googlecode.com/svn/maven</url>
+		</repository>
+		<repository>
+			<id>maven-gae-plugin-repo</id>
+			<url>http://maven-gae-plugin.googlecode.com/svn/repository</url>
+			<name>maven-gae-plugin repository</name>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven-gae-plugin-repo</id>
+			<name>Maven Google App Engine Repository</name>
+			<url>http://maven-gae-plugin.googlecode.com/svn/repository/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>${gae.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
+			<version>${objectify.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ftv-web</finalName>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>net.kindleit</groupId>
+					<artifactId>maven-gae-plugin</artifactId>
+					<version>${maven-gae-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>net.kindleit</groupId>
+				<artifactId>maven-gae-plugin</artifactId>
+				<version>${maven-gae-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>net.kindleit</groupId>
+						<artifactId>gae-runtime</artifactId>
+						<!-- <version>1.3.7</version> -->
+						<version>${gae.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.groovy.maven</groupId>
+				<artifactId>gmaven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generateStubs</goal>
+							<goal>compile</goal>
+							<goal>generateTestStubs</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>3.0.5.RELEASE</spring.version>
+		<gae.home>/opt/appengine-java-sdk-1.5.1</gae.home>
+		<groovy.version>1.7.5</groovy.version>
+		<gae.version>1.5.1</gae.version>
+		<objectify.version>2.2.2</objectify.version>
+		<jpa.version>1.0</jpa.version>
+		<jstl.version>1.2</jstl.version>
+		<commons-lang.version>2.4</commons-lang.version>
+		<maven-gae-plugin.version>0.7.1</maven-gae-plugin.version>
+		<maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
+		<java.version>1.6</java.version>
+	</properties>
+</project>
